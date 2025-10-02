@@ -35,7 +35,7 @@ Data loading flow:
 flowchart LR
     A[Notebook start] --> B[Resolve data path]
     B --> C[Read CSV into pandas]
-    C --> D[Quick head() check]
+    C --> D[Quick head check]
 ```
 
 ### 2) Quick EDA (sanity and shape)
