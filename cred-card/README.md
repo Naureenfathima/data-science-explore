@@ -2,10 +2,12 @@
 
 This mini-project predicts a customer's credit card reward tier (Basic, Gold, Platinum) from their spending behavior.
 
-### What’s in this repo
-- `credit_card_rewards_5000.csv`: the dataset.
-- `credit_card_rewards_analysis.ipynb`: a Jupyter notebook with EDA, modeling, and evaluation.
+### What's in this repo
+- `data/credit_card_rewards_5000.csv`: the dataset.
+- `notebooks/credit_card_rewards_analysis.ipynb`: a Jupyter notebook with EDA, modeling, and evaluation.
 - `requirements.txt`: Python packages used.
+- `consume/MODEL_USAGE.md`: comprehensive guide on how to use the trained model.
+- `consume/example_usage.py`: script demonstrating model usage with sample customers.
 
 ### Quick start
 1) Create and activate a virtual environment
@@ -23,7 +25,7 @@ pip install -r requirements.txt
 ```
 jupyter lab
 ```
-Then open `credit_card_rewards_analysis.ipynb` and select the kernel named "Python (.venv) cred-card". Run cells top-to-bottom.
+Then open `notebooks/credit_card_rewards_analysis.ipynb` and select the kernel named "Python (.venv) cred-card". Run cells top-to-bottom.
 
 ### What the notebook does (in plain language)
 1) Load data and preview columns
@@ -81,9 +83,40 @@ model.predict(new_customer)[0]
 ```
 This returns the predicted reward tier.
 
+### Using the trained model
+
+After running the notebook and training the model, you can use it to predict reward tiers for new customers:
+
+#### Quick prediction example:
+```python
+import pandas as pd
+
+# Example customer data
+new_customer = pd.DataFrame([{
+    'Annual_Income': 800000,
+    'Monthly_Average_Spend': 40000,
+    'Transactions_Per_Month': 30,
+    'Online_Offline_Spend_Ratio': 0.6,
+    'Travel_Spend_Ratio': 0.2,
+    'Dining_Spend_Ratio': 0.3,
+}])
+
+# Predict reward tier
+predicted_tier = model.predict(new_customer)[0]
+print(f"Predicted reward tier: {predicted_tier}")
+```
+
+#### For detailed usage instructions:
+- See `consume/MODEL_USAGE.md` for comprehensive documentation
+- Run `python consume/example_usage.py` for interactive examples
+- The model achieves 93% accuracy on test data
+
+### Learn the math behind the notebook (beginner-friendly)
+- Read `docs/beginner_math_guide.md` for step-by-step intuition and formulas used in the notebook (scaling, Random Forests, metrics, TF‑IDF, logistic regression, cross-validation, and more).
+
 ### Tips for beginners
 - Run the notebook one cell at a time; read outputs before moving on.
-- If something breaks, check column names and that you’re using the right kernel.
+- If something breaks, check column names and that you're using the right kernel.
 - Use the visuals (histograms, heatmap, confusion matrix) to build intuition.
 
 
