@@ -14,6 +14,15 @@ We split data into training and test sets to estimate generalization.
 
 No formula here; it’s a procedure to avoid overfitting. Typical split is 80%/20%.
 
+Flow overview:
+```mermaid
+flowchart LR
+    A[Full dataset] -->|Stratify by label| B[Train set ~80%]
+    A -->|Stratify by label| C[Test set ~20%]
+    B --> D[Fit pipeline: Scaler + RandomForest]
+    D --> E[Evaluate on Test]
+```
+
 ### 3) Standardization (Scaler)
 For numeric features, we often transform them to have mean 0 and standard deviation 1:
 \[
@@ -45,6 +54,15 @@ Prediction:
 \]
 where \(T\) is number of trees.
 
+Tree splitting concept:
+```mermaid
+flowchart TD
+    R[Root node] -->|Income > threshold?| L[Left child]
+    R -->|No| R2[Right child]
+    L --> L1[Majority = Gold]
+    R2 --> R21[Majority = Basic]
+```
+
 ### 6) Evaluation Metrics
 
 Given true labels \(y\) and predictions \(\hat{y}\), we compute:
@@ -70,6 +88,22 @@ Given true labels \(y\) and predictions \(\hat{y}\), we compute:
 \]
 
 - Confusion matrix: a table counting how predictions fall across true vs. predicted classes.
+
+Confusion matrix structure:
+```mermaid
+flowchart TB
+    subgraph CM[Confusion Matrix]
+    A1[True Basic] -->|Pred Basic| AB
+    A1 -->|Pred Gold| AG
+    A1 -->|Pred Platinum| AP
+    B1[True Gold] -->|Pred Basic| BB
+    B1 -->|Pred Gold| BG
+    B1 -->|Pred Platinum| BP
+    C1[True Platinum] -->|Pred Basic| CB
+    C1 -->|Pred Gold| CG
+    C1 -->|Pred Platinum| CP
+    end
+```
 
 ### 7) Feature Importance (Random Forest)
 Random Forest feature importance estimates how much each feature reduces impurity, aggregated across all trees. A high importance means the feature frequently made helpful splits.

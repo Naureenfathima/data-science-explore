@@ -114,6 +114,11 @@ print(f"Predicted reward tier: {predicted_tier}")
 ### Learn the math behind the notebook (beginner-friendly)
 - Read `docs/beginner_math_guide.md` for step-by-step intuition and formulas used in the notebook (scaling, Random Forests, metrics, TF‑IDF, logistic regression, cross-validation, and more).
 
+### Deeper documentation
+- `docs/notebook_walkthrough.md`: line-by-line explanation of the notebook’s code, decisions, and pitfalls to avoid.
+- `docs/pipeline_and_inference.md`: how to productionize the pipeline, validate inputs, tune hyperparameters, persist artifacts, and monitor performance.
+- `docs/glossary.md`: concise definitions of key terms used across the project.
+
 ### Tips for beginners
 - Run the notebook one cell at a time; read outputs before moving on.
 - If something breaks, check column names and that you're using the right kernel.
